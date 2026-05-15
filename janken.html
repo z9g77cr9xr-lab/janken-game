@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>じゃんけんゲーム</title>
+    <style>.container {
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #e0f160;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .choices {      
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .choice {       
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .choice:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;    
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgb(223, 66, 18);
+            font-family: sans-serif;
+        }
+        
+        h1 {
+            color: rgb(82, 107, 41);
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>じゃんけんゲーム</h1>
+        <div class="choices">
+            <button class="choice" id="goo">グー</button>
+            <button class="choice" id="choki">チョキ</button>
+            <button class="choice" id="paa">パー</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script>
+   let winCount = 0;
+let loseCount = 0;
+let drawCount = 0;
+
+function getComputerChoice() {
+  let hands = ["グー", "チョキ", "パー"];
+  let randomIndex = Math.floor(Math.random() * 3);
+  return hands[randomIndex];
+}
+
+function determineWinner(user, computer) {
+  if (user === computer) {
+    return "あいこです！";
+  } else if (
+    (user === "グー" && computer === "チョキ") ||
+    (user === "チョキ" && computer === "パー") ||
+    (user === "パー" && computer === "グー")
+  ) {
+    return "あなたの勝ち！";
+  } else {
+    return "コンピューターの勝ち！";
+  }
+}
+
+document.getElementById("goo").addEventListener("click", function() {
+  let computerChoice = getComputerChoice();
+  let resultText = determineWinner("グー", computerChoice);
+  if (resultText === "あなたの勝ち！やったね！") { winCount++; }
+  else if (resultText === "コンピューターの勝ち！残念！") { loseCount++; }
+  else { drawCount++; }
+  document.getElementById("result").textContent =
+    "あなた：グー　コンピューター：" + computerChoice + "　" + resultText +
+    "　勝ち：" + winCount + "　負け：" + loseCount + "　あいこ：" + drawCount;
+});
+
+document.getElementById("choki").addEventListener("click", function() {
+  let computerChoice = getComputerChoice();
+  let resultText = determineWinner("チョキ", computerChoice);
+  if (resultText === "あなたの勝ち！やったね！") { winCount++; }
+  else if (resultText === "コンピューターの勝ち！残念！") { loseCount++; }
+  else { drawCount++; }
+  document.getElementById("result").textContent =
+    "あなた：チョキ　コンピューター：" + computerChoice + "　" + resultText +
+    "　勝ち：" + winCount + "　負け：" + loseCount + "　あいこ：" + drawCount;
+});
+
+document.getElementById("paa").addEventListener("click", function() {
+  let computerChoice = getComputerChoice();
+  let resultText = determineWinner("パー", computerChoice);
+  if (resultText === "あなたの勝ち！やったね！") { winCount++; }
+  else if (resultText === "コンピューターの勝ち！残念！") { loseCount++; }
+  else { drawCount++; }
+  document.getElementById("result").textContent =
+    "あなた：パー　コンピューター：" + computerChoice + "　" + resultText +
+    "　勝ち：" + winCount + "　負け：" + loseCount + "　あいこ：" + drawCount;
+}); 
+</script>
+</body>
+</html>
